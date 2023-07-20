@@ -1,5 +1,6 @@
 package com.example.validationexample.service;
 
+import com.example.validationexample.configuration.AiriConfig;
 import com.example.validationexample.entitiy.Product;
 import com.example.validationexample.exception.FileException;
 import com.example.validationexample.repository.ProductRepository;
@@ -20,6 +21,9 @@ import java.util.UUID;
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private AiriConfig airiConfig;
 
     public Product saveProduct(Product product) {
         return productRepository.save(product);
@@ -44,6 +48,11 @@ public class ProductService {
         existingProduct.setImage_path(newFileName);
 
         return productRepository.save(existingProduct);
+    }
+
+    private void sampleMethod() {
+        Integer port = airiConfig.getPort();
+        String host = airiConfig.getHost();
     }
 
 
